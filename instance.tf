@@ -60,7 +60,7 @@ variable "user_data" {
   
 
 
-resource "oci_core_instance" "_REPLACE_" {
+resource "oci_core_instance" "testing" {
 	display_name = var.name
 	agent_config {
 		is_management_disabled = "false"
@@ -135,7 +135,7 @@ resource "oci_core_instance" "_REPLACE_" {
 
 resource "null_resource" "wait_for_cloud_init" {
 	depends_on = [
-	  oci_core_instance._REPLACE_
+	  oci_core_instance.testing
 	]
 	provisioner "local-exec" {
 		command = "sleep ${var.wait_time}"
@@ -148,7 +148,7 @@ resource "null_resource" "script_exec" {
 	]
 	connection {
 	  type = "ssh"
-	  host = oci_core_instance._REPLACE_.private_ip
+	  host = oci_core_instance.testing.private_ip
 	  user = "ubuntu"
 	  private_key = file(var.ssh_private_key)
 
