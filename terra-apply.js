@@ -38,7 +38,7 @@ create();
     // ENCODE USER_DATA
     
     // docker service error: (Cannot connect to the Docker daemon)
-    let user_data_decoded = "#cloud-boothook\n#!/bin/bash\nwhoami > root-output.txt\ndocker run hello-world 2>docker.log"
+    let user_data_decoded = "#cloud-boothook\n#!/bin/bash\nwhoami > /tmp/root-output.txt\ndate >> /tmp/date.txt\ndocker run hello-world 2>/tmp/docker.log\ndate >> /tmp/date.txt"
     
     // crashes the instance, can't connect via ssh: (same with and without 'sudo')
     // let user_data_decoded = "#cloud-boothook\n#!/bin/bash\nwhoami > root-output.txt\nsudo usermod -a -G docker $USER\nsudo systemctl enable docker.service\nsudo systemctl start docker.service\nsudo chmod 666 /var/run/docker.sock\ndocker run hello-world 2>docker.log"
@@ -50,7 +50,8 @@ create();
 
     // TERRAFORM APPLY
 
-    const terraform_cmd = 'terraform apply -auto-approve -var "name='+instance_name+'" -var "cpus='+cpus+'" -var "memory='+memory+'" -var "user_data='+user_data_encoded+'" -target=oci_core_instance.'+instance_name;
+    //const terraform_cmd = 'terraform apply -auto-approve -var "name='+instance_name+'" -var "cpus='+cpus+'" -var "memory='+memory+'" -var "user_data='+user_data_encoded+'" -target=oci_core_instance.'+instance_name;
+    const terraform_cmd = 'terraform init; terraform apply --var-file=vars.tfvars --auto-approve;'
     console.log(`terraform_cmd: ${terraform_cmd}`);
 
     const { exec } = require('child_process');

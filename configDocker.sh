@@ -15,11 +15,8 @@ echo -e "[4/13] Done.\n\n"
 echo "[5/13] Configure Docker"
 
 sudo usermod -a -G docker $USER
-
 sudo systemctl enable docker.service
-
 sudo systemctl start docker.service
-
 sudo chmod 666 /var/run/docker.sock
 
 echo -e "[5/13] Done.\n\n"
