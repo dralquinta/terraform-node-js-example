@@ -22,4 +22,9 @@ ssh_private_key = "./keys/SSH/id_rsa"
 private_key_path = "./api_key.pem"
 
 wait_time = 5
+
+compartment_name = "DALQUINT_HUB"
+network_compartment_name = "DALQUINT_HUB"
+subnet_name = "dalquint_hub_pvt_subnet"
+vcn_display_name = "DALQUINT_HUB_VCN"
 ```

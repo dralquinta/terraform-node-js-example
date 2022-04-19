@@ -5,3 +5,7 @@ keys
 .terraform
 *.lock.hcl
 *.backup
+
+backend.tf
+output.tf
+instance.tf

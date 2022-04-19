@@ -22,15 +22,42 @@ create();
 
     // PREPARE TF FILE
 
-    const file_name = 'terraform-config-files/generic-instance.tf';
+    const instance_file_name = 'terraform-config-files/generic-instance.tf';
     var fs = require('fs')
-    fs.readFile(file_name, 'utf8', function (err,data) {
+    fs.readFile(instance_file_name, 'utf8', function (err,data) {
       if (err) {
         return console.log(err);
       }
       var result = data.replace(/_REPLACE_/g, instance_name);
 
       fs.writeFile('instance.tf', result, 'utf8', function (err) {
+         if (err) return console.log(err);
+      });
+    });
+
+    const output_file_name = 'terraform-config-files/generic-output.tf';
+    var fs = require('fs')
+    fs.readFile(output_file_name, 'utf8', function (err,data) {
+      if (err) {
+        return console.log(err);
+      }
+      var result = data.replace(/_REPLACE_/g, instance_name);
+
+      fs.writeFile('output.tf', result, 'utf8', function (err) {
+         if (err) return console.log(err);
+      });
+    });
+
+
+    const backend_file_name = 'terraform-config-files/generic-backend.tf';
+    var fs = require('fs')
+    fs.readFile(backend_file_name, 'utf8', function (err,data) {
+      if (err) {
+        return console.log(err);
+      }
+      var result = data.replace(/_REPLACE_/g, instance_name);
+
+      fs.writeFile('backend.tf', result, 'utf8', function (err) {
          if (err) return console.log(err);
       });
     });
