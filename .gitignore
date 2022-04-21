@@ -6,3 +6,4 @@ keys
 *.lock.hcl
 *.backup
 instance.tf
+output.tf
