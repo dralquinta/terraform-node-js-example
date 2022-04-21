@@ -15,7 +15,7 @@ const memory = args[2] != undefined ? args[2] : 64
 create();
 
   async function create() {
-    
+
     if(instance_name == undefined) {
       console.log('You must indicate a instance name');
       return;
@@ -24,9 +24,9 @@ create();
 
     // PREPARE TF FILES
 
-    const file_name = 'terraform-config-files/generic-instance.tf';
+    const instance_file_name = 'terraform-config-files/generic-instance.tf';
     var fs = require('fs')
-    fs.readFile(file_name, 'utf8', function (err,data) {
+    fs.readFile(instance_file_name, 'utf8', function (err,data) {
       if (err) {
         return console.log(err);
       }
@@ -50,11 +50,24 @@ create();
       });
     });
 
+    const backend_file_name = 'terraform-config-files/generic-backend.tf';
+    var fs = require('fs')
+    fs.readFile(backend_file_name, 'utf8', function (err,data) {
+      if (err) {
+        return console.log(err);
+      }
+      var result = data.replace(/_REPLACE_/g, instance_name);
+
+      fs.writeFile('backend.tf', result, 'utf8', function (err) {
+         if (err) return console.log(err);
+      });
+    });
+
 
     // TERRAFORM APPLY
 
     //const terraform_cmd = 'terraform apply -auto-approve -var "name='+instance_name+'" -var "cpus='+cpus+'" -var "memory='+memory+'" -var "user_data='+user_data_encoded+'" -target=oci_core_instance.'+instance_name;
-    const terraform_cmd = 'terraform init; terraform apply --var-file=vars.tfvars --auto-approve;'
+    const terraform_cmd = 'terraform init -reconfigure; terraform apply --var-file=vars.tfvars --auto-approve;'
     console.log(`terraform_cmd: ${terraform_cmd}`);
 
     const { exec } = require('child_process');
