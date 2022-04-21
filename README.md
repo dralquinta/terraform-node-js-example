@@ -7,7 +7,6 @@ user_ocid = "ocid1.user.oc1..foobar"
 fingerprint = "11:fo:bar:bar:foo70"
 tenancy_ocid = "ocid1.tenancy.oc1..foobar"
 
-name = "test"
 memory = "2"
 cpus = "1"
 

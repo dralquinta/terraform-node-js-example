@@ -78,7 +78,7 @@ create();
     // TERRAFORM APPLY
 
     //const terraform_cmd = 'terraform apply -auto-approve -var "name='+instance_name+'" -var "cpus='+cpus+'" -var "memory='+memory+'" -var "user_data='+user_data_encoded+'" -target=oci_core_instance.'+instance_name;
-    const terraform_cmd = 'terraform init; terraform apply --var-file=vars.tfvars --auto-approve;'
+    const terraform_cmd = 'terraform init -reconfigure; terraform apply -var name='+instance_name+' --var-file=vars.tfvars --auto-approve;'
     console.log(`terraform_cmd: ${terraform_cmd}`);
 
     const { exec } = require('child_process');
