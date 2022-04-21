@@ -1,67 +1,7 @@
 # Instance Creator
 
-variable "tenancy_ocid" {	
-}
-
-variable "compartment_ocid" {	
-}
-
-variable "ssh_public_key" {    
-}
-
-variable "ssh_private_key" {
-    default = "./keys/SSH/id_rsa"
-}
-
-variable "private_key_path" {
-}
-
-variable "user_ocid" {	
-}
-
-variable "fingerprint" {
-	
-}
-
-variable "region" {
-	}
-
-variable "custom_image_ocid" {			
-	default = "ocid1.image.oc1.sa-santiago-1.aaaaaaaaqre5wczm5kmvoh373ljuukomkcv6lofz4jfl6lzn46u5m7bgt56a" # Image with docker installed
-}
-
-variable "subnet_ocid" {  
-	
-}
- variable "ad" {
-	 
- }
-
-variable "wait_time" {
-
-}
-
-variable "name" { default = "test"}
-variable "memory" { default = "2"}
-variable "cpus" { default = "2"}
-provider "oci" {
-  tenancy_ocid     = var.tenancy_ocid
-  user_ocid        = var.user_ocid
-  fingerprint      = var.fingerprint
-  private_key_path = var.private_key_path
-  region           = var.region
-}
-
-
-variable "user_data" {	
-	default = null
-}
-
-  
-
-
 resource "oci_core_instance" "_REPLACE_" {
-	display_name = var.name
+	display_name = "_REPLACE_"
 	agent_config {
 		is_management_disabled = "false"
 		is_monitoring_disabled = "false"
@@ -106,7 +46,7 @@ resource "oci_core_instance" "_REPLACE_" {
 		recovery_action = "RESTORE_INSTANCE"
 	}
 	availability_domain = var.ad
-	compartment_id = var.compartment_ocid
+	compartment_id = var.tenancy_ocid
 	create_vnic_details {
 		assign_private_dns_record = "true"
 		assign_public_ip = "true"
@@ -116,7 +56,7 @@ resource "oci_core_instance" "_REPLACE_" {
 		are_legacy_imds_endpoints_disabled = "false"
 	}
 	is_pv_encryption_in_transit_enabled = "true"
-	shape = "VM.Standard.E3.Flex"
+	shape = var.shape
 	shape_config {
 		memory_in_gbs = var.memory
 		ocpus = var.cpus
@@ -127,9 +67,9 @@ resource "oci_core_instance" "_REPLACE_" {
 		source_type = "image"
 	}
 	metadata = {
-        ssh_authorized_keys = file(var.ssh_public_key)                
-    } 
-    preserve_boot_volume = false
+      ssh_authorized_keys = file(var.ssh_public_key)                
+  } 
+  preserve_boot_volume = false
 }
 
 
@@ -148,7 +88,7 @@ resource "null_resource" "script_exec" {
 	]
 	connection {
 	  type = "ssh"
-	  host = oci_core_instance._REPLACE_.private_ip
+	  host = oci_core_instance._REPLACE_.public_ip  # TODO: change to private (to use only from JumpGate)
 	  user = "ubuntu"
 	  private_key = file(var.ssh_private_key)
 

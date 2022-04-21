@@ -16,6 +16,7 @@ subnet_ocid = "ocid1.subnet.oc1.sa-santiago-1.foobar"
 region = "sa-santiago-1"
 ad = "oDQF:SA-SANTIAGO-1-AD-1"
 custom_image_ocid = "ocid1.image.oc1.sa-santiago-1.foobar"
+shape = "VM.Standard.E3.Flex"
 
 ssh_public_key = "./keys/SSH/id_rsa.pub"
 ssh_private_key = "./keys/SSH/id_rsa"
