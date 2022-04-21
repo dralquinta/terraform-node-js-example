@@ -44,3 +44,16 @@ variable "memory" {
 variable "cpus" {
   default = "2" 
 }
+
+variable "GH_DCKR_TKN" {
+    type        = string
+    description = "This is your github token saved in your env variables."
+}
+variable "DOCKER_PASS" {
+    type        = string
+    description = "This is your dockerhub password saved in your env variables."
+}
+variable "DOCKER_USER" {
+    type        = string
+    description = "This is your dockerhub username saved in your env variables."
+}

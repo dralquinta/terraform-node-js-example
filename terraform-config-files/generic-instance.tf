@@ -97,10 +97,11 @@ resource "null_resource" "script_exec" {
 		inline = [
 			"set +x",
 			"#!/bin/sh",
-			"whoami > /tmp/root-output.txt",
-			"date >> /tmp/date.txt",
 			"docker run hello-world 2>/tmp/docker.log",
 			"date >> /tmp/date.txt",
+			"echo 'GH_DCKR_TKN=${var.GH_DCKR_TKN}' >> /home/ubuntu/.bashrc",
+			"echo 'DOCKER_PASS=${var.DOCKER_PASS}' >> /home/ubuntu/.bashrc",
+			"echo 'DOCKER_USER=${var.DOCKER_USER}' >> /home/ubuntu/.bashrc",
 		]
 		
 	}

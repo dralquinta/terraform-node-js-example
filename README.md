@@ -2,7 +2,7 @@
 
 ### sample tfvars file
 
-```terraform
+```oci credentials for terraform 
 user_ocid = "ocid1.user.oc1..foobar"
 fingerprint = "11:fo:bar:bar:foo70"
 tenancy_ocid = "ocid1.tenancy.oc1..foobar"
@@ -23,4 +23,11 @@ ssh_private_key = "./keys/SSH/id_rsa"
 private_key_path = "./api_key.pem"
 
 wait_time = 5
+shape = "VM.Standard.E4.Flex"
+```
+
+```local environment variables
+export TF_VAR_GH_DCKR_TKN="<value>"
+export TF_VAR_DOCKER_PASS="<value>"
+export TF_VAR_DOCKER_USER="<value>"
 ```
