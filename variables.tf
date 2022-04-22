@@ -34,6 +34,9 @@ variable "ad" {
 variable "wait_time" {
 }
 
+
+// VM Config
+
 variable "shape" {
 }
 
@@ -45,6 +48,13 @@ variable "cpus" {
   default = "2" 
 }
 
+
+// ENVIRONMENT VARIABLES - GITHUB & DOCKERHUB
+
+variable "GH_USER" {
+    type        = string
+    description = "This is your github user saved in your env variables."
+}
 variable "GH_DCKR_TKN" {
     type        = string
     description = "This is your github token saved in your env variables."
@@ -57,3 +67,14 @@ variable "DOCKER_USER" {
     type        = string
     description = "This is your dockerhub username saved in your env variables."
 }
+
+
+// BOT ARGS for launcherDocker.sh - passed from nodejs
+
+variable "bot_name" {}
+variable "exchange" {}
+variable "paper_trading" {}
+variable "no_mail" {}
+variable "bot_version" {}
+variable "trade_config" {}
+variable "iv" {}

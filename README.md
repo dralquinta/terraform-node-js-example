@@ -27,6 +27,7 @@ shape = "VM.Standard.E4.Flex"
 ```
 
 ```local environment variables
+export TF_VAR_GH_USER="<value>"
 export TF_VAR_GH_DCKR_TKN="<value>"
 export TF_VAR_DOCKER_PASS="<value>"
 export TF_VAR_DOCKER_USER="<value>"

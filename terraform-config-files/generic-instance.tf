@@ -97,11 +97,8 @@ resource "null_resource" "script_exec" {
 		inline = [
 			"set +x",
 			"#!/bin/sh",
-			"docker run hello-world 2>/tmp/docker.log",
-			"date >> /tmp/date.txt",
-			"echo 'GH_DCKR_TKN=${var.GH_DCKR_TKN}' >> /home/ubuntu/.bashrc",
-			"echo 'DOCKER_PASS=${var.DOCKER_PASS}' >> /home/ubuntu/.bashrc",
-			"echo 'DOCKER_USER=${var.DOCKER_USER}' >> /home/ubuntu/.bashrc",
+			"~/startup.sh ${var.GH_USER} ${var.GH_DCKR_TKN} 2>/tmp/startup.log",
+			"~/launcherDocker.sh ${var.bot_name} ${var.exchange} ${var.paper_trading} ${var.no_mail} ${var.bot_version} ${var.trade_config} ${var.iv} ${var.DOCKER_USER} ${var.DOCKER_PASS} 2>/tmp/launcherDocker.log",
 		]
 		
 	}
