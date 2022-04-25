@@ -22,10 +22,13 @@ variable "fingerprint" {
 variable "region" {
 }
 
-variable "custom_image_ocid" {
+variable "custom_image_name" {
 }
 
-variable "subnet_ocid" {
+variable "private_vcn_name" {
+}
+
+variable "private_subnet_name" {
 }
 
 variable "ad" {
@@ -51,14 +54,6 @@ variable "cpus" {
 
 // ENVIRONMENT VARIABLES - GITHUB & DOCKERHUB
 
-variable "GH_USER" {
-    type        = string
-    description = "This is your github user saved in your env variables."
-}
-variable "GH_DCKR_TKN" {
-    type        = string
-    description = "This is your github token saved in your env variables."
-}
 variable "DOCKER_PASS" {
     type        = string
     description = "This is your dockerhub password saved in your env variables."

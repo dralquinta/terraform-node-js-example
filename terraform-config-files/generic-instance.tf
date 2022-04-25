@@ -50,7 +50,7 @@ resource "oci_core_instance" "_REPLACE_" {
 	create_vnic_details {
 		assign_private_dns_record = "true"
 		assign_public_ip = "true"
-		subnet_id = var.subnet_ocid
+		subnet_id = local.private_subnet_ocid
 	}
 	instance_options {
 		are_legacy_imds_endpoints_disabled = "false"
@@ -63,7 +63,7 @@ resource "oci_core_instance" "_REPLACE_" {
 	}
 	source_details {
 		# ID for Custom Image
-		source_id = var.custom_image_ocid
+		source_id = local.custom_image_ocid
 		source_type = "image"
 	}
 	metadata = {
@@ -97,7 +97,7 @@ resource "null_resource" "script_exec" {
 		inline = [
 			"set +x",
 			"#!/bin/sh",
-			"~/startup.sh ${var.GH_USER} ${var.GH_DCKR_TKN} 2>/tmp/startup.log",
+			"~/startup.sh 2>/tmp/startup.log",
 			"~/launcherDocker.sh ${var.bot_name} ${var.exchange} ${var.paper_trading} ${var.no_mail} ${var.bot_version} ${var.trade_config} ${var.iv} ${var.DOCKER_USER} ${var.DOCKER_PASS} 2>/tmp/launcherDocker.log",
 		]
 		
