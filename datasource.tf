@@ -26,7 +26,7 @@ data "oci_core_subnets" "SUBNET" {
   }
 }
 
-data "oci_core_images" "CUSTOM" { 
+data "oci_core_images" "CUSTOM" {
   compartment_id = var.tenancy_ocid
   filter {
     name   = "display_name"
@@ -35,13 +35,13 @@ data "oci_core_images" "CUSTOM" {
 }
 
 locals {
-/* 
+  /* 
   compartment_ocid    = lookup(data.oci_identity_compartments.COMPARTMENTS.compartments[0], "id")
   nw_compartment_ocid = lookup(data.oci_identity_compartments.NWCOMPARTMENTS.compartments[0], "id")
 */
 
   private_subnet_ocid = length(data.oci_core_subnets.SUBNET.subnets) > 0 ? data.oci_core_subnets.SUBNET.subnets[0].id : null
-  private_vcn_ocid = lookup(data.oci_core_vcns.VCN.virtual_networks[0], "id")
-  custom_image_ocid = length(data.oci_core_images.CUSTOM.images) > 0 ? data.oci_core_images.CUSTOM.images.0.id : null
-  
+  private_vcn_ocid    = lookup(data.oci_core_vcns.VCN.virtual_networks[0], "id")
+  custom_image_ocid   = length(data.oci_core_images.CUSTOM.images) > 0 ? data.oci_core_images.CUSTOM.images.0.id : null
+
 }

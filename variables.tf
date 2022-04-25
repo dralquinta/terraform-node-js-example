@@ -44,23 +44,23 @@ variable "shape" {
 }
 
 variable "memory" {
-  default = "4" 
+  default = "4"
 }
 
 variable "cpus" {
-  default = "2" 
+  default = "2"
 }
 
 
 // ENVIRONMENT VARIABLES - GITHUB & DOCKERHUB
 
 variable "DOCKER_PASS" {
-    type        = string
-    description = "This is your dockerhub password saved in your env variables."
+  type        = string
+  description = "This is your dockerhub password saved in your env variables."
 }
 variable "DOCKER_USER" {
-    type        = string
-    description = "This is your dockerhub username saved in your env variables."
+  type        = string
+  description = "This is your dockerhub username saved in your env variables."
 }
 
 
