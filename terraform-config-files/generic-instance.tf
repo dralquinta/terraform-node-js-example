@@ -49,7 +49,7 @@ resource "oci_core_instance" "_REPLACE_" {
 	compartment_id = var.tenancy_ocid
 	create_vnic_details {
 		assign_private_dns_record = "true"
-		assign_public_ip = "true"
+		assign_public_ip = "false" # only private IP to use only from JumpGate
 		subnet_id = local.private_subnet_ocid
 	}
 	instance_options {
@@ -88,7 +88,7 @@ resource "null_resource" "script_exec" {
 	]
 	connection {
 	  type = "ssh"
-	  host = oci_core_instance._REPLACE_.public_ip  # TODO: change to private (to use only from JumpGate)
+	  host = oci_core_instance._REPLACE_.private_ip  # private IP to use only from JumpGate
 	  user = "ubuntu"
 	  private_key = file(var.ssh_private_key)
 
