@@ -1,0 +1,8 @@
+version: '3'
+services:
+  terraform:
+    image: paretofede/terraform-api
+    container_name: terraform-api
+    restart:  always
+    ports:
+      - '8000:8000'

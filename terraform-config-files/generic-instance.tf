@@ -98,7 +98,8 @@ resource "null_resource" "script_exec" {
       "set +x",
       "#!/bin/sh",
       "~/startup.sh 2>/tmp/startup.log",
-      "~/launcherDocker.sh ${var.bot_name} ${var.exchange} ${var.paper_trading} ${var.no_mail} ${var.bot_version} ${var.trade_config} ${var.iv} ${var.DOCKER_USER} ${var.DOCKER_PASS} 2>/tmp/launcherDocker.log",
+      "~/launcherDocker.sh ${var.nickname} ${var.exchange} ${var.paper_trading} ${var.no_mail} ${var.bot_version} ${var.trade_config} ${var.iv} ${var.DOCKER_USER} ${var.DOCKER_PASS} 2>/tmp/launcherDocker.log",
+      "~/launchZabbixAgent.sh 2>/tmp/launchZabbixAgent.log",
     ]
 
   }

@@ -66,6 +66,7 @@ variable "DOCKER_USER" {
 
 // BOT ARGS for launcherDocker.sh - passed from nodejs
 
+variable "nickname" {}
 variable "bot_name" {}
 variable "exchange" {}
 variable "paper_trading" {}

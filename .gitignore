@@ -9,3 +9,4 @@ instance.tf
 output.tf
 backend.tf
 *trade_config*
+*node_modules*
